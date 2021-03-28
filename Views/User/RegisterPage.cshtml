@@ -1,0 +1,64 @@
+@model knowledgenetwork.Controllers.Dtos.RegisterDto
+<div class="section-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Bilgi Ağına hoş geldiniz</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container container-int">
+    <div class="row">
+        <div class="col-md-8 col-sm-8">
+            <h1>
+                Bilgi paylaştıkça çoğalır
+            </h1>
+            <img src="~/img/post3.png" alt="post 2" class="img-responsive">
+            <br>
+            <p>
+                Sende en güncel konularda güncel kalmak için aramıza katıl
+            </p>
+            <p>
+                Birçok konuda yazarlarımızın yazdıklarını takip et
+            </p>
+        </div>
+        <div class="col-md-4 col-sm-4 sidebar text-center">
+            <form class="form-signin" method="POST" asp-action="Register" asp-controller="User">
+                <img class="mb-4" src="https://myptsolutions.com/wp-content/uploads/2014/07/user-plus.png" alt=""
+                    width="72" height="72">
+                <h1 class="h3 mb-3 font-weight-normal">Bilgi Ağı </h1>
+                @if (Model.ErrorMessage != null)
+                {
+                 <div class="alert alert-danger" role="alert">
+                    @Model.ErrorMessage
+                </div>   
+                }
+                <label for="inputName" class="sr-only">Ad</label>
+                <input type="text" id="inputEmail" class="form-control" asp-for="Name" placeholder="Ad" required>
+                <br>
+                <label for="inputName" class="sr-only">Soyad</label>
+                <input type="text" id="inputEmail" class="form-control" asp-for="Surname" placeholder="Soyad" required>
+                <br>
+                <label for="inputEmail" class="sr-only">Email adresi</label>
+                <input type="email" id="inputEmail" class="form-control" asp-for="Email" placeholder="Email adresi" required autofocus>
+                <br>
+                <label for="inputPassword" class="sr-only">Parola</label>
+                <input type="password" id="inputPassword" class="form-control" asp-for="Password" placeholder="Parola" required>
+                <br>
+                <label for="inputPassword" class="sr-only">Parola Tekrar</label>
+                <input type="password" id="inputPassword" class="form-control" asp-for="PasswordConfirm" placeholder="Parola Tekrar" required>
+                <div class="checkbox mb-3">
+                    <label>
+                        <a asp-controller="User" asp-action="RegisterPage">Hesabınız yok mu?</a>
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Giriş Yap</button>
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>

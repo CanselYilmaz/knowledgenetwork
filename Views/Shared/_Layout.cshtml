@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@ViewData["Title"] - knowledgenetwork</title>
+  <link href="~/css/font-awesome.min.css" rel="stylesheet">
+  <link href="~/css/bootstrap.css" rel="stylesheet">
+  <link href="~/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">Bilgi Agi</a>
+      </div>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+          <li><a asp-controller="User" asp-action="LoginPage">Giriş Yap</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  @RenderBody()
+
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3">
+          <a class="footer-brand" href="index.html">Bilgi Agi</a>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar quam sed consequat adipiscing. Sed
+            est quam, pretium a vestibulum vel, aliquam vitae eros.</p>
+          <ul class="list-inline list-unstyled social-networks">
+            <li>
+              <a href="#">
+                <div class="icon-social icon-social-facebook normal">
+                  <i class="fa fa-facebook"></i>
+                </div>
+                <div class="icon-social hover">
+                  <i class="fa fa-facebook"></i>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <div class="icon-social icon-social-twitter normal">
+                  <i class="fa fa-twitter"></i>
+                </div>
+                <div class="icon-social hover">
+                  <i class="fa fa-twitter"></i>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <div class="icon-social icon-social-google-plus normal">
+                  <i class="fa fa-google-plus"></i>
+                </div>
+                <div class="icon-social hover">
+                  <i class="fa fa-google-plus"></i>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <div class="icon-social icon-social-youtube normal">
+                  <i class="fa fa-youtube-play"></i>
+                </div>
+                <div class="icon-social hover">
+                  <i class="fa fa-youtube-play"></i>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <div class="icon-social icon-social-linkedin normal">
+                  <i class="fa fa-linkedin"></i>
+                </div>
+                <div class="icon-social hover">
+                  <i class="fa fa-linkedin"></i>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <div class="icon-social icon-social-pinterest normal">
+                  <i class="fa fa-pinterest"></i>
+                </div>
+                <div class="icon-social hover">
+                  <i class="fa fa-pinterest"></i>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-3">
+          <h3>İletişim</h3>
+          <address>
+            <i class="fa fa-envelope"></i> cansel@yilmaz.com
+          </address>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="footer-after">
+    <div class="container">
+      <div class="row">
+        <p class="col-md-10">©2021 Cansel Yılmaz</p>
+        <p class="col-md-2 legal"><a href="#" rel="nofollow">Yasal Uyarı</a></p>
+      </div>
+    </div>
+  </div>
+  <script src="~/js/site.js" asp-append-version="true"></script>
+  <script type="text/javascript" src="~/js/jquery-1.10.2.js"></script>
+  <script type="text/javascript" src="~/js/bootstrap.js"></script>
+  <script type="text/javascript" src="~/js/plugins.js"></script>
+  <script type="text/javascript" src="~/js/banzhow.js"></script>
+  <script type="text/javascript" src="~/js/switcher/switcher.js"></script>
+  <link href="~/js/switcher/switcher.css" rel="stylesheet">
+  @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
