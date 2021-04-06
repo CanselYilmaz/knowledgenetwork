@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@{
+  string name = Context.Session.GetString("name");
+}
+
+<!DOCTYPE html>
 <html lang="tr">
 
 <head>
@@ -26,7 +31,14 @@
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
-          <li><a asp-controller="User" asp-action="LoginPage">Giriş Yap</a></li>
+          @if (name == null)
+          {
+              <li><a asp-controller="User" asp-action="LoginPage">Giriş Yap</a></li>
+          }else{
+            <li><a href="">@name</a></li>
+            <li><a asp-controller="User" asp-action="Logout">Çıkış Yap</a></li>
+          }
+          
         </ul>
       </div>
     </div>

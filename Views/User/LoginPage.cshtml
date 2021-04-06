@@ -1,3 +1,4 @@
+@model String
 <div class="section-header">
     <div class="container">
         <div class="row">
@@ -23,15 +24,19 @@
             </p>
         </div>
         <div class="col-md-4 col-sm-4 sidebar text-center">
-            <form class="form-signin">
+            @if (Model != null)
+            {
+                <h2>@Model</h2>
+            }
+            <form class="form-signin" asp-action="Login" asp-controller="User" method="POST">
                 <img class="mb-4" src="https://pluspng.com/img-png/user-png-icon-file-user-icon-black-01-png-311.png" alt=""
                     width="72" height="72">
                 <h1 class="h3 mb-3 font-weight-normal">Bilgi Ağı </h1>
                 <label for="inputEmail" class="sr-only">Email adresi</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email adresi" required autofocus>
+                <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email adresi" required autofocus>
                 <br>
                 <label for="inputPassword" class="sr-only">Parola</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Parola" required>
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Parola" required>
                 <div class="checkbox mb-3">
                     <label>
                         <a asp-controller="User" asp-action="RegisterPage">Hesabınız yok mu?</a>

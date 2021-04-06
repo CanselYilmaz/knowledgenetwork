@@ -1,7 +1,9 @@
+using System;
 using System.Threading.Tasks;
 using knowledgenetwork.Controllers.Dtos;
 using knowledgenetwork.Models;
 using knowledgenetwork.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace knowledgenetwork.Controllers
@@ -15,28 +17,45 @@ namespace knowledgenetwork.Controllers
             _userRepo = userRepo;
         }
 
-        public IActionResult LoginPage()
+        public IActionResult LoginPage(string ErrorMessage)
         {
-            return View();
+            if (HttpContext.Session.GetInt32("id").HasValue)
+            {
+                return Redirect("/Home/Index");
+            }
+            return View(ErrorMessage);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
             User user = await _userRepo.LoginWithEmailAndPassword(email, password);
             if (user != null)
             {
-                // Login successfull
+                HttpContext.Session.SetInt32("id", user.Id);
+                HttpContext.Session.SetString("name", user.Name);
+                return RedirectToAction("LoginPage");
             }
-            return Redirect("LoginPage");
+            return RedirectToAction("LoginPage", "Email veya parola hatalı.");
         }
 
         public IActionResult RegisterPage(RegisterDto registerDto)
         {
+            if (HttpContext.Session.GetInt32("id").HasValue)
+            {
+                return Redirect("/Home/Index");
+            }
             if (registerDto == null)
             {
                 registerDto = new RegisterDto();
             }
             return View(registerDto);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("/Home/Index");
         }
 
         [HttpPost]
