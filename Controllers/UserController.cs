@@ -11,7 +11,6 @@ namespace knowledgenetwork.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepo;
-
         public UserController(IUserRepository userRepo)
         {
             _userRepo = userRepo;
