@@ -25,6 +25,14 @@ namespace knowledgenetwork.Controllers
             return View(ErrorMessage);
         }
 
+        public IActionResult AdminPage(){
+            if (!HttpContext.Session.GetInt32("id").HasValue)
+            {
+                return Redirect("/Home/Index");
+            }
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
@@ -33,6 +41,9 @@ namespace knowledgenetwork.Controllers
             {
                 HttpContext.Session.SetInt32("id", user.Id);
                 HttpContext.Session.SetString("name", user.Name);
+                if(user.Role == Role.ADMIN){
+                return RedirectToAction("AdminPage");
+                }
                 return RedirectToAction("LoginPage");
             }
             return RedirectToAction("LoginPage", "Email veya parola hatalı.");
