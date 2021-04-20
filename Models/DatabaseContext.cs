@@ -8,6 +8,11 @@ namespace knowledgenetwork.Models
 
         public DbSet<User> User { get; set; }
 
+        public DbSet<Comment> Comment{get;set;}
+        public DbSet<Category> Category {get;set;}
+        public DbSet<Tags> Tags {get;set;}
+        public DbSet<Blog> Blog {get;set;}
+
           protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
