@@ -8,6 +8,8 @@ namespace knowledgenetwork.Models
         public User User { get; set; }
         public int UserId { get; set; }
         public string Content { get; set; }
-        public DateTime CreatedAt { get; set; }= DateTime.Now;
-}
+        public Blog Blog { get; set; }
+        public int BlogId { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+    }
 }

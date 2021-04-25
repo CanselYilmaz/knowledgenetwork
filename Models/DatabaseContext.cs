@@ -25,6 +25,21 @@ namespace knowledgenetwork.Models
             Password="admin",
             Role=Role.ADMIN
             });
+
+            modelBuilder.Entity<Category>().HasData(new Category{
+                Id = 1,
+                Title="Bilim"
+            });
+
+             modelBuilder.Entity<Category>().HasData(new Category{
+                Id = 2,
+                Title="Eğlence"
+            });
+
+             modelBuilder.Entity<Category>().HasData(new Category{
+                Id = 3,
+                Title="Sanat"
+            });
         }
     }
 }

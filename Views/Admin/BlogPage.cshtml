@@ -1,0 +1,51 @@
+@model knowledgenetwork.Models.Blog
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br>
+<form method="POST" id="form">
+    <div class="form-group">
+        <input type="text" class="form-control" id="title" placeholder="Başlık">
+    </div>
+    <div id="summernote">
+
+    </div>
+    <div class="form-group">
+        <input type="file" class="form-control" name="BannerUrl">
+    </div>
+    @Html.DropDownList("CategoryId",null,"Bir kategori seçiniz!",new {@class="form-control"})
+    <br/>
+    <div class="btn-group-toggle">
+        <button type="button" onclick="Save()" class="btn btn-primary">Kaydet</button>
+    </div>
+
+</form>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+@section Scripts{
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({height: 300});
+    });
+    function Save() {
+        var title = document.getElementById("title");
+        var subtitle = document.getElementById("subtitle");
+        var content = $('#summernote').summernote('code');
+        var category = document.getElementById("CategoryId");
+        var form = document.getElementById("form");
+        var formData = new FormData(form);
+        formData.append("title", title.value);
+        formData.append("content", content);
+        formData.append("categoryid", category.value);
+        var url = '/Admin/BlogSave';
+        fetch(url, {
+                method: 'POST',
+                body: formData
+            }).then(res => res.json())
+            .then(result => {
+                alert('Blog Kaydedildi');
+                setTimeout(function(){ window.location = ('/Admin/Blog'); }, 3000);
+            })
+    }
+</script>
+}

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using knowledgenetwork.Models;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +38,7 @@ namespace knowledgenetwork.Repositories
 
         public async Task<List<User>> GetAllAsync()
         {
-            return await _context.User.ToListAsync();
+            return await _context.User.Where(u => u.Role == Role.AUTHOR).ToListAsync();
         }
 
         public async Task<User> GetByIdAsync(int Id)

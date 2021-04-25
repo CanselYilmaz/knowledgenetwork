@@ -1,0 +1,23 @@
+@model knowledgenetwork.Models.User
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br>
+
+<form method="POST" asp-action="AuthorSave" asp-controller="Admin">
+ <label for="inputName" class="sr-only">Ad</label>
+ <input type="hidden" asp-for="Id">
+                <input type="text" id="inputEmail" class="form-control" asp-for="Name" placeholder="Ad" required>
+                <br>
+                <label for="inputName" class="sr-only">Soyad</label>
+                <input type="text" id="inputEmail" class="form-control" asp-for="Surname" placeholder="Soyad" required>
+                <br>
+                <label for="inputEmail" class="sr-only">Email adresi</label>
+                <input type="email" id="inputEmail" class="form-control" asp-for="Email" placeholder="Email adresi" required autofocus>
+                <br>
+                <label for="inputPassword" class="sr-only">Parola</label>
+                <input type="text" id="inputPassword" class="form-control" asp-for="Password" placeholder="Parola" required>
+                <br>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Kaydet</button>
+                <a class="btn btn-lg btn-danger btn-block"asp-controller="Admin" asp-action="DeleteAuthor" asp-route-id="@Model.Id"  >Sil</a>
+</form>

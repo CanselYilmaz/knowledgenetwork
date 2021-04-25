@@ -25,24 +25,16 @@ namespace knowledgenetwork.Controllers
             return View(ErrorMessage);
         }
 
-        public IActionResult AdminPage(){
-            if (!HttpContext.Session.GetInt32("id").HasValue)
-            {
-                return Redirect("/Home/Index");
-            }
-            return View();
-        }
-
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            User user = await _userRepo.LoginWithEmailAndPassword(email, password);
+            User user = await _userRepo.LoginWithEmailAndPassword(email, email);
             if (user != null)
             {
                 HttpContext.Session.SetInt32("id", user.Id);
                 HttpContext.Session.SetString("name", user.Name);
                 if(user.Role == Role.ADMIN){
-                return RedirectToAction("AdminPage");
+                return RedirectToAction("AdminPage", "Admin");
                 }
                 return RedirectToAction("LoginPage");
             }

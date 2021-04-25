@@ -1,0 +1,56 @@
+@model IEnumerable<knowledgenetwork.Models.Category>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br>
+<a onclick="$('#exampleModal').modal('show')" href="#">Yeni Kategori Oluştur</a>
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Kategori</th>
+      <th scope="col">Oluşturulma Tarihi</th>
+      <th scope="col">İşlem</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var cat in Model){
+    <tr>
+      <th scope="row">@cat.Id</th>
+      <td>@cat.Title</td>
+      <td>@cat.CreatedAt</td>
+      <td>
+      <a asp-controller="Admin" asp-action="DeleteCategory" asp-route-id="@cat.Id">Sil</a>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+        <form method="POST" action="/Admin/CreateCategory">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Yeni Kategori</h5>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <input type="hidden" name="Id"  >
+              <label class="form-label">Kategori</label>
+              <input type="text" class="form-control"  placeholder="Kategori" name="Title">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link" onclick="$('#exampleModal').modal('hide')">Kapat</button>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+          </div>
+        </div>
+        </form>
+  </div>
+ </div>
+
+ @section Scripts{
+
+}

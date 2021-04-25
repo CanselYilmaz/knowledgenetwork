@@ -10,8 +10,8 @@ using knowledgenetwork.Models;
 namespace knowledgenetwork.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210420112426_inittables")]
-    partial class inittables
+    [Migration("20210424210231_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,10 +28,10 @@ namespace knowledgenetwork.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("BannerUrl")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CommentId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -59,8 +59,6 @@ namespace knowledgenetwork.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CommentId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Blog");
@@ -85,6 +83,29 @@ namespace knowledgenetwork.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2021, 4, 25, 0, 2, 30, 598, DateTimeKind.Local).AddTicks(260),
+                            Title = "Bilim",
+                            UpdateAt = new DateTime(2021, 4, 25, 0, 2, 30, 609, DateTimeKind.Local).AddTicks(6680)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2021, 4, 25, 0, 2, 30, 610, DateTimeKind.Local).AddTicks(1730),
+                            Title = "Eğlence",
+                            UpdateAt = new DateTime(2021, 4, 25, 0, 2, 30, 610, DateTimeKind.Local).AddTicks(1840)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2021, 4, 25, 0, 2, 30, 610, DateTimeKind.Local).AddTicks(2080),
+                            Title = "Sanat",
+                            UpdateAt = new DateTime(2021, 4, 25, 0, 2, 30, 610, DateTimeKind.Local).AddTicks(2090)
+                        });
                 });
 
             modelBuilder.Entity("knowledgenetwork.Models.Comment", b =>
@@ -93,6 +114,9 @@ namespace knowledgenetwork.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
@@ -104,6 +128,8 @@ namespace knowledgenetwork.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
 
                     b.HasIndex("UserId");
 
@@ -177,12 +203,6 @@ namespace knowledgenetwork.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("knowledgenetwork.Models.Comment", "Comment")
-                        .WithMany()
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("knowledgenetwork.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -191,18 +211,24 @@ namespace knowledgenetwork.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("Comment");
-
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("knowledgenetwork.Models.Comment", b =>
                 {
+                    b.HasOne("knowledgenetwork.Models.Blog", "Blog")
+                        .WithMany()
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("knowledgenetwork.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Blog");
 
                     b.Navigation("User");
                 });

@@ -1,0 +1,28 @@
+@model IEnumerable<knowledgenetwork.Models.User>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br>
+<a href="/Admin/AuthorSavePage">Yeni Yazar Ekle</a>
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">İsim</th>
+      <th scope="col">Soyisim</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var author in Model){
+    <tr>
+      <th scope="row">@author.Id</th>
+      <td>@author.Name</td>
+      <td>@author.Surname</td>
+      <td>
+      <a asp-controller="Admin" asp-action="AuthorSavePage" asp-route-id="@author.Id">Düzenle</a>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
