@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using knowledgenetwork.Models;
 using knowledgenetwork.Repositories.Interfaces;
@@ -20,6 +21,11 @@ namespace knowledgenetwork.Repositories
             return await _context.SaveChangesAsync() != 0;
         }
 
+        public async Task<List<Blog>> blogListWithPagination(int pageNumber)
+        {
+            return await _context.Blog.OrderByDescending(b => b.CreateAt).Take(3).ToListAsync();
+        }
+
         public async Task<bool> DeleteByIdAsync(int Id)
         {
             Blog blog = await _context.Blog.FirstOrDefaultAsync(c => c.Id == Id);
@@ -39,6 +45,11 @@ namespace knowledgenetwork.Repositories
         public async Task<Blog> GetByIdAsync(int Id)
         {
             return await _context.Blog.Include(b => b.Category).FirstOrDefaultAsync(c => c.Id == Id);
+        }
+
+        public async Task<int> totalBlogCount()
+        {
+           return await _context.Blog.CountAsync();
         }
 
         public async Task<bool> UpdateAsync(Blog t)
