@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using knowledgenetwork.Models;
 using knowledgenetwork.Repositories.Interfaces;
 using knowledgenetwork.Repositories;
+using knowledgenetwork.Controllers.Dtos;
 
 namespace knowledgenetwork.Controllers
 {
@@ -15,18 +16,23 @@ namespace knowledgenetwork.Controllers
         private readonly ICommentRepository commentRepository;
         private readonly IBlogRepository blogRepository;
         private readonly ICategoryRepository catRepository;
+        private readonly ITagsRepository tagsRepository;
 
 
-        public HomeController(ICommentRepository cRepo, IBlogRepository blogRepo, ICategoryRepository catRepo)
+        public HomeController(ICommentRepository cRepo, IBlogRepository blogRepo, ICategoryRepository catRepo, ITagsRepository tagsRepo)
         {
             commentRepository = cRepo;
             blogRepository = blogRepo;
             catRepository = catRepo;
+            tagsRepository = tagsRepo;
         }
         public HomeController() { }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            BlogPageDto blogPageDto = new BlogPageDto();
+            blogPageDto.Blogs = await blogRepository.GetAllAsync();
+            blogPageDto.Tags = await tagsRepository.GetAllAsync();
             return View();
         }
 
