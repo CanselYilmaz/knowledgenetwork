@@ -4,14 +4,14 @@
 - Bilgi Ağı Asp Net Core , Entityframework Core ve MSSQL veritabanı kullanılarak geliştirilmiştir.
 
 - Kullanıcılar sisteme kayıt olup, giriş yapabilir.
-![](resimler/girisekrani.PNG)
-![](resimler/kayitekrani.PNG)
+![](resimler/girisekrani.png)
+![](resimler/kayitekrani.png)
 
 
 - Kullanıcılar anasayfada yazarların paylaşmış olduğu blogları görüntülüyebilir, arayabilir ve inceleyebilir.
 
-![](resimler/anasayfa.PNG)
-![](resimler/blogekrani.PNG)
+![](resimler/anasayfa.png)
+![](resimler/blogekrani.png)
 
 - Kullancılar bloglara yorum yapabilir.
 
